@@ -26,13 +26,19 @@ router.get('/', (req, res)=>{
 router.post('/',(req, res)=>{
     const newVideoData = req.body
     
-
+    if (!newVideoData.title || !newVideoData.description) {
+        return res.status(400).json({ error: 'Title and description are required' });
+    }
     const videoData= JSON.parse(fs.readFileSync('./data/videos.json'))
-    const timestamp = Date.now(); 
+    
     const newVideoEntry ={
         id: uuidv4(),
-        ...newVideoData,
-        timestamp:timestamp,
+        image:'http://localhost:8080/images/image8.jpg',
+        title: newVideoData.title || 'Untitled Video', 
+        description: newVideoData.description || 'No description available',
+        timestamp: Date.now(), 
+        channel:'Yujie Wang'
+        
     }
     videoData.push(newVideoEntry)
     fs.writeFileSync('./data/videos.json', JSON.stringify(videoData))
