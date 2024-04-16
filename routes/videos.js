@@ -37,7 +37,7 @@ router.post('/',(req, res)=>{
         title: newVideoData.title || 'Untitled Video', 
         description: newVideoData.description || 'No description available',
         timestamp: Date.now(), 
-        channel:'Yujie Wang'
+        channel:'Yujie Wang',
         
     }
     videoData.push(newVideoEntry)
